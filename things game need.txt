@@ -1,0 +1,19 @@
+must haves:
+- sideways segments
+- vertical segments
+- corner segments
+- movement and jump
+- procedural generated level
+- auto scrolling
+- delete segments gone from screen
+
+should haves:
+- crouch
+- roll (less vertical jump, more distance)
+- slide
+- health
+- gas that slowly approaches the player
+
+could haves:
+- enemies
+- high score (tracks how much distance you made)
