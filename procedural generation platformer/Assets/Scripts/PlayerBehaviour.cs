@@ -4,10 +4,21 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    private int playerSpeed = 10;
-    private Rigidbody2D rb;
-    private float jumpForce = 7f;
-    private bool isGrounded;
+    int playerSpeed = 10;
+    Rigidbody2D rb;
+
+    float jumpForce = 10f;
+    bool isGrounded;
+
+    bool crouching;
+
+    bool sprinting;
+
+    float slideSpeed = 20;
+    bool sliding;
+
+    public GameObject stand;
+    public GameObject crouch;
 
     void Start()
     {
@@ -29,6 +40,38 @@ public class PlayerBehaviour : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
+
+        if (Input.GetKey(KeyCode.LeftShift) && !crouching && !sliding)
+        {
+            sprinting = true;
+            playerSpeed = 20;
+        }
+        else
+        {
+            sprinting = false;
+            playerSpeed = 10;
+        }
+
+        if (Input.GetKey(KeyCode.C) && sprinting)
+        {
+            crouch.SetActive(true);
+            stand.SetActive(false);
+            transform.position = transform.position + new Vector3(slideSpeed * Time.deltaTime, 0, 0);
+            sliding = true;
+        }
+        else if (Input.GetKey(KeyCode.C))
+        {
+            crouch.SetActive(true);
+            stand.SetActive(false);
+            crouching = true;
+        }
+        else
+        {
+            crouch.SetActive(false);
+            stand.SetActive(true);
+            sliding = false;
+            crouching = false;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -37,6 +80,15 @@ public class PlayerBehaviour : MonoBehaviour
         if (collision.gameObject.CompareTag("Floor"))
         {
             isGrounded = true;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        //checking if the player is touching the ground, using a tag defined in the editor
+        if (collision.gameObject.CompareTag("Floor"))
+        {
+            isGrounded = false;
         }
     }
 }
