@@ -52,7 +52,7 @@ public class PlayerBehaviour : MonoBehaviour
             playerSpeed = 10;
         }
 
-        if (Input.GetKey(KeyCode.C) && sprinting)
+        if (Input.GetKey(KeyCode.C) && Input.GetKey(KeyCode.LeftShift))
         {
             crouch.SetActive(true);
             stand.SetActive(false);
