@@ -691,6 +691,7 @@ BoxCollider2D:
   m_EdgeRadius: 0
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1 &1155375949
 GameObject:
   m_ObjectHideFlags: 0
@@ -1250,6 +1251,8 @@ BoxCollider2D:
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 --- !u!1 &818155537
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,6 +1548,7 @@ BoxCollider2D:
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_Direction: 0
 --- !u!50 &1661664067
 Rigidbody2D:
@@ -1677,6 +1681,8 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
