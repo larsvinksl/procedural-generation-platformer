@@ -7,18 +7,22 @@ public class PlayerBehaviour : MonoBehaviour
     int playerSpeed = 10;
     Rigidbody2D rb;
 
-    float jumpForce = 10f;
-    bool isGrounded;
+    bool facingRight = true;
+
+    float jumpForce = 12f;
+    bool isGrounded = true;
+    public float groundCheckDistance = 1.1f;
+    public LayerMask groundLayer;
 
     bool crouching;
-
-    bool sprinting;
-
-    float slideSpeed = 20;
-    bool sliding;
-
     public GameObject stand;
     public GameObject crouch;
+
+    float slideForce = 12f;
+    bool sliding = false;
+
+    float rollXForce = 20f;
+    float rollYForce = 6f;
 
     void Start()
     {
@@ -30,36 +34,40 @@ public class PlayerBehaviour : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             transform.position = transform.position + new Vector3(playerSpeed * Time.deltaTime, 0, 0);
+            facingRight = true;
         }
         if (Input.GetKey(KeyCode.A))
         {
             transform.position = transform.position + new Vector3(-playerSpeed * Time.deltaTime, 0, 0);
+            facingRight = false;
         }
 
-        if (Input.GetKey(KeyCode.Space) && isGrounded)
+        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, groundLayer);
+
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !crouching)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
-
-        if (Input.GetKey(KeyCode.LeftShift) && !crouching && !sliding)
+        else if (Input.GetKeyDown(KeyCode.Space) && isGrounded && crouching)
         {
-            sprinting = true;
+            StartCoroutine(Roll());
+
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift) && !crouching)
+        {
             playerSpeed = 20;
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftShift) && crouching && !sliding)
+        {
+            StartCoroutine(Sliding());
         }
         else
         {
-            sprinting = false;
             playerSpeed = 10;
         }
 
-        if (Input.GetKey(KeyCode.C) && Input.GetKey(KeyCode.LeftShift))
-        {
-            crouch.SetActive(true);
-            stand.SetActive(false);
-            transform.position = transform.position + new Vector3(slideSpeed * Time.deltaTime, 0, 0);
-            sliding = true;
-        }
-        else if (Input.GetKey(KeyCode.C))
+        if (Input.GetKey(KeyCode.C))
         {
             crouch.SetActive(true);
             stand.SetActive(false);
@@ -69,26 +77,41 @@ public class PlayerBehaviour : MonoBehaviour
         {
             crouch.SetActive(false);
             stand.SetActive(true);
-            sliding = false;
             crouching = false;
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    IEnumerator Sliding()
     {
-        //checking if the player is touching the ground, using a tag defined in the editor
-        if (collision.gameObject.CompareTag("Floor"))
+        if (facingRight)
         {
-            isGrounded = true;
+            rb.velocity = new Vector2(slideForce, rb.velocity.y);
         }
+        else
+        {
+            rb.velocity = new Vector2(-slideForce, rb.velocity.y);
+        }
+        sliding = true;
+
+        yield return new WaitForSeconds(0.8f);
+
+        rb.velocity = new Vector2(0, 0);
+        sliding = false;
     }
 
-    void OnCollisionExit2D(Collision2D collision)
+    IEnumerator Roll()
     {
-        //checking if the player is touching the ground, using a tag defined in the editor
-        if (collision.gameObject.CompareTag("Floor"))
+        if (facingRight)
         {
-            isGrounded = false;
+            rb.velocity = new Vector2(rollXForce, rollYForce);
         }
+        else
+        {
+            rb.velocity = new Vector2(-rollXForce, rollYForce);
+        }
+
+        yield return new WaitForSeconds(0.6f);
+
+        rb.velocity = new Vector2(0, 0);
     }
 }
