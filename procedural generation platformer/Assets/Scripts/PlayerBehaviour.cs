@@ -51,7 +51,6 @@ public class PlayerBehaviour : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Space) && isGrounded && crouching)
         {
             StartCoroutine(Roll());
-
         }
 
         if (Input.GetKey(KeyCode.LeftShift) && !crouching)
