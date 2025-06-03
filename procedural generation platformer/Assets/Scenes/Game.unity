@@ -664,15 +664,15 @@ PrefabInstance:
       objectReference: {fileID: 1670873000}
     - target: {fileID: 3523745854474648597, guid: 8ed90da053537524fb7c40db8c801897, type: 3}
       propertyPath: maxSpeed
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3523745854474648597, guid: 8ed90da053537524fb7c40db8c801897, type: 3}
       propertyPath: minSpeed
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3523745854474648597, guid: 8ed90da053537524fb7c40db8c801897, type: 3}
       propertyPath: accelerationFactor
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3523745854474648600, guid: 8ed90da053537524fb7c40db8c801897, type: 3}
       propertyPath: m_RootOrder
