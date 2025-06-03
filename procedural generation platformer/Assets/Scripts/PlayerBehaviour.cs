@@ -7,6 +7,8 @@ public class PlayerBehaviour : MonoBehaviour
     int playerSpeed = 10;
     Rigidbody2D rb;
 
+    public RectTransform healthBar;
+
     bool facingRight = true;
 
     float jumpForce = 12f;
@@ -24,6 +26,9 @@ public class PlayerBehaviour : MonoBehaviour
     float rollXForce = 20f;
     float rollYForce = 6f;
 
+    public float health;
+    public float maxHealth = 100f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,14 +36,21 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            GotHit(5);
+        }
+
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position = transform.position + new Vector3(playerSpeed * Time.deltaTime, 0, 0);
+            transform.position += new Vector3(playerSpeed * Time.deltaTime, 0, 0);
+            if (!facingRight) Flip();
             facingRight = true;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position = transform.position + new Vector3(-playerSpeed * Time.deltaTime, 0, 0);
+            transform.position += new Vector3(-playerSpeed * Time.deltaTime, 0, 0);
+            if (facingRight) Flip();
             facingRight = false;
         }
 
@@ -80,37 +92,32 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    void Flip()
+    {
+        // Flip the player's sprite
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+    }
+
     IEnumerator Sliding()
     {
-        if (facingRight)
-        {
-            rb.velocity = new Vector2(slideForce, rb.velocity.y);
-        }
-        else
-        {
-            rb.velocity = new Vector2(-slideForce, rb.velocity.y);
-        }
+        rb.velocity = new Vector2(facingRight ? slideForce : -slideForce, rb.velocity.y);
         sliding = true;
-
         yield return new WaitForSeconds(0.8f);
-
-        rb.velocity = new Vector2(0, 0);
+        rb.velocity = Vector2.zero;
         sliding = false;
     }
 
     IEnumerator Roll()
     {
-        if (facingRight)
-        {
-            rb.velocity = new Vector2(rollXForce, rollYForce);
-        }
-        else
-        {
-            rb.velocity = new Vector2(-rollXForce, rollYForce);
-        }
-
+        rb.velocity = new Vector2(facingRight ? rollXForce : -rollXForce, rollYForce);
         yield return new WaitForSeconds(0.6f);
+        rb.velocity = Vector2.zero;
+    }
 
-        rb.velocity = new Vector2(0, 0);
+    public void GotHit(int damage)
+    {
+        health = Mathf.Clamp(health - damage, 0, maxHealth);
+        healthBar.localScale = new Vector3(health * .9f / maxHealth, .8f);
     }
 }
+
