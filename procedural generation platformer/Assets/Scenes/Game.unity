@@ -658,6 +658,54 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3523745853006791672, guid: 8ed90da053537524fb7c40db8c801897, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523745853006791672, guid: 8ed90da053537524fb7c40db8c801897, type: 3}
+      propertyPath: RotationModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523745853006791672, guid: 8ed90da053537524fb7c40db8c801897, type: 3}
+      propertyPath: RotationModule.curve.scalar
+      value: 0.08726646
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523745853006791672, guid: 8ed90da053537524fb7c40db8c801897, type: 3}
+      propertyPath: RotationModule.x.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523745853006791672, guid: 8ed90da053537524fb7c40db8c801897, type: 3}
+      propertyPath: RotationModule.y.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523745853006791672, guid: 8ed90da053537524fb7c40db8c801897, type: 3}
+      propertyPath: RotationModule.curve.minScalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523745853006791672, guid: 8ed90da053537524fb7c40db8c801897, type: 3}
+      propertyPath: RotationModule.curve.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523745853006791672, guid: 8ed90da053537524fb7c40db8c801897, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 750
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523745853006791672, guid: 8ed90da053537524fb7c40db8c801897, type: 3}
+      propertyPath: InitialModule.startRotation.scalar
+      value: 6.283185
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523745853006791672, guid: 8ed90da053537524fb7c40db8c801897, type: 3}
+      propertyPath: InitialModule.startRotation.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523745853006791672, guid: 8ed90da053537524fb7c40db8c801897, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523745853006791672, guid: 8ed90da053537524fb7c40db8c801897, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3523745854474648597, guid: 8ed90da053537524fb7c40db8c801897, type: 3}
       propertyPath: player
       value: 
