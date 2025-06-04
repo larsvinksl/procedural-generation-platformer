@@ -44,13 +44,11 @@ public class PlayerBehaviour : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += new Vector3(playerSpeed * Time.deltaTime, 0, 0);
-            if (!facingRight) Flip();
             facingRight = true;
         }
         if (Input.GetKey(KeyCode.A))
         {
             transform.position += new Vector3(-playerSpeed * Time.deltaTime, 0, 0);
-            if (facingRight) Flip();
             facingRight = false;
         }
 
@@ -90,12 +88,6 @@ public class PlayerBehaviour : MonoBehaviour
             stand.SetActive(true);
             crouching = false;
         }
-    }
-
-    void Flip()
-    {
-        // Flip the player's sprite
-        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     IEnumerator Sliding()
