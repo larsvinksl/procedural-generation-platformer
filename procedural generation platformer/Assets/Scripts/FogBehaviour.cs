@@ -9,6 +9,8 @@ public class FogBehaviour : MonoBehaviour
     public float maxSpeed = 20f; // Maximum movement speed
     public float accelerationFactor = 0.5f; // Adjusts acceleration scaling
 
+    public Transform DeletePoint;
+
     void Update()
     {
         if (player != null)
