@@ -20,6 +20,7 @@ public class LevelGenerator : MonoBehaviour
 
     public Transform Detector;
     public Transform LastPoint;
+    public FogBehaviour Fog;
 
     int rnd;
 
@@ -90,13 +91,14 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-    void generate(GameObject Room)
+    void generate(GameObject room)
     {
-        GameObject instance = Instantiate(Room);
+        GameObject instance = Instantiate(room);
         Transform SP = instance.transform.Find("SnapPoint");
         Transform Snap = instance.transform.Find("Snapper");
         Vector3 offset = Snap.position - instance.transform.position;
         instance.transform.position = LastPoint.position - offset;
+        Fog.AddSegment(instance);
         LastPoint = SP;
     }
 }

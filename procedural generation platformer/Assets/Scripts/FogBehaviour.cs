@@ -10,6 +10,12 @@ public class FogBehaviour : MonoBehaviour
     public float accelerationFactor = 0.5f; // Adjusts acceleration scaling
 
     public Transform DeletePoint;
+    private List<GameObject> spawnedSegments = new List<GameObject>();
+
+    public void AddSegment(GameObject segment)
+    {
+        spawnedSegments.Add(segment);
+    }
 
     void Update()
     {
@@ -19,6 +25,15 @@ public class FogBehaviour : MonoBehaviour
             float speed = Mathf.Clamp(Mathf.Pow(distance * accelerationFactor, 2), minSpeed, maxSpeed);
 
             transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+        }
+
+        for (int i = spawnedSegments.Count - 1; i >= 0; i--)
+        {
+            if (spawnedSegments[i].transform.position.x < DeletePoint.position.x)
+            {
+                Destroy(spawnedSegments[i]);
+                spawnedSegments.RemoveAt(i);
+            }
         }
     }
 }
