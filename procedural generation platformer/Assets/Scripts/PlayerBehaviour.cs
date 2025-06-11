@@ -7,7 +7,7 @@ public class PlayerBehaviour : MonoBehaviour
     int playerSpeed = 10;
     Rigidbody2D rb;
 
-    public RectTransform healthBar;
+    public GameObject DeathScreen;
 
     bool facingRight = true;
 
@@ -25,13 +25,15 @@ public class PlayerBehaviour : MonoBehaviour
 
     float rollXForce = 20f;
     float rollYForce = 6f;
-
+    
+    public RectTransform healthBar;
     public float health;
     public float maxHealth = 100f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        Time.timeScale = 1;
     }
 
     void Update()
@@ -87,6 +89,15 @@ public class PlayerBehaviour : MonoBehaviour
             crouch.SetActive(false);
             stand.SetActive(true);
             crouching = false;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Death"))
+        {
+            DeathScreen.SetActive(true);
+            Time.timeScale = 0;
         }
     }
 
