@@ -10,10 +10,12 @@ must haves:
 should haves:
 - crouch
 - roll (less vertical jump, more distance)
+- sprint
 - slide
 - health
 - gas that slowly approaches the player
 
 could haves:
+- attack
 - enemies
 - high score (tracks how much distance you made)
